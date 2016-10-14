@@ -8,7 +8,7 @@ function initMap() {
     var wdir = document.getElementById("wdir_control");
     var sidenav = document.getElementById("sidenav-wrapper");
 
-    wdir.appendChild(document.getElementById("sidenav-wrapper").cloneNode(true));
+    wdir.appendChild(sidenav.cloneNode(true));
 
     document.body.removeChild(sidenav);
 
