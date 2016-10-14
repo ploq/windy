@@ -6,7 +6,11 @@ function initMap() {
          streetViewControl: false
     });
     var wdir = document.getElementById("wdir_control");
+    var sidenav = document.getElementById("sidenav-wrapper");
+
     wdir.appendChild(document.getElementById("sidenav-wrapper").cloneNode(true));
+
+    document.body.removeChild(sidenav);
 
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById("wdir_control"));
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("adv_opt"));
