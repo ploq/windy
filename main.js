@@ -5,11 +5,29 @@ function initMap() {
          mapTypeControl: false,
          streetViewControl: false
     });
-    map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("wdir_control"));
-    map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('sidenav-wrapper'));
+    var wdir = document.getElementById("wdir_control");
+    wdir.appendChild(document.getElementById("sidenav-wrapper").cloneNode(true));
 
-    
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById("wdir_control"));
+    map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("adv_opt"));
 
+
+    $("#adv_opt").on("click", function () {
+        var map = document.getElementById("main");
+        map.style["margin-left"] = "300px";
+    });
+
+    $(document.body).on("click", "#sidenav-overlay", function () {
+        var map = document.getElementById("main");
+        map.style["margin-left"] = "0px";
+    });
+
+    $(document.body).on("click", ".drag-target", function () {
+        var map = document.getElementById("main");
+        map.style["margin-left"] = "0px";
+    });
+
+    $(".button-collapse").sideNav();
 }
 
 function drawChart() {
@@ -33,8 +51,8 @@ function drawChart() {
         title: '',
         pieSliceText: 'label',
         pieStartAngle: 337.5,
-        width: 350,
-        height: 350,
+        width: 500,
+        height: 500,
         chartArea: {top: 60},
         fontName: "Roboto Mono",
         pieSliceTextStyle: {
@@ -82,22 +100,8 @@ function checkRow(selectedArr, row) {
     return -1;
 }
 
-$("#adv_opt").on("click", function() {
-    var map = document.getElementById("main");
-    map.style["margin-left"] = "300px";
-});
 
-$(document.body).on("click", "#sidenav-overlay", function() {
-    var map = document.getElementById("main");
-    map.style["margin-left"] = "0px";
-});
 
-$(document.body).on("click", ".drag-target", function() {
-    var map = document.getElementById("main");
-    map.style["margin-left"] = "0px";
-});
-
-$(".button-collapse").sideNav();
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 

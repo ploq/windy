@@ -31,7 +31,7 @@
         font-weight: 300;
         text-overflow: ellipsis;
         padding: 0 11px 0 13px;
-        width: 100%;
+        width: 294px;
       }
 
       #pac-input:focus {
@@ -51,26 +51,25 @@
         box-shadow: 0 0px 6px rgba(0, 0, 0, 0.3);
       }
 
-      .wdir {
-        margin-bottom: 15px;
-        margin-left: 13px;
-        overflow: hidden;
-        width: 69px;
-      }
-
       #wdir_control {
-        width: 300px;
-        height: 200px;
-        margin-bottom: 100px;
+        width: 350px;
+        height: 100%;
+        background-color: rgba(214, 215, 216, 0.5)
       }
 
       #sidenav-wrapper {
-        margin-left: 30px;
-        margin-bottom: 40px;
+        padding-left: 15px;
+      }
+
+      #piechart {
+        height: 400px;
+        left: -75px;
+        position: relative;
+        z-index: -1;
       }
 
       #adv_opt {
-        width: 100%;
+        margin-bottom: 15px;
       }
     </style>
 
@@ -93,8 +92,9 @@
 <div id="sidenav-wrapper">
   
   <input id="pac-input" class="controls" type="text" placeholder="Search By City">
-  <button id="adv_opt" data-activates="slide-out" class="button-collapse btn">Advanced options</button>
 </div>
+  <button id="adv_opt" data-activates="slide-out" class="button-collapse btn red">Advanced options</button>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
@@ -102,9 +102,6 @@
     
     <script src="main.js" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRqIj5qsadDRvnP8kWrbWravGOcr2iEGc&callback=initMap&libraries=places" defer></script>
-    
-
-    
   </body>
 </html>
       
