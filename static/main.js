@@ -115,9 +115,10 @@ var distanceSlider = document.getElementById('distance-slider');
 noUiSlider.create(distanceSlider, {
     start: [ 10 ],
     connect: [true, false],
-    snap: false,
+    snap: true,
     range: {
         'min': 0,
+        '10%': 10,
         '10%': 10,
         '30%': 50,
         '50%': 100,
