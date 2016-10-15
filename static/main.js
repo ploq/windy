@@ -184,6 +184,7 @@ function deleteMarkers() {
 }
 
 function updateMarkers() {
+    var infowindow = new google.maps.InfoWindow();
     deleteMarkers();
     var center = map.getCenter();
     var radius = Number(document.getElementById('dist_counter').innerHTML.split("km")[0])*1000;
@@ -206,11 +207,19 @@ function updateMarkers() {
             var lng = data[n].coords.coordinates[0];
             var latlng = {lat: lat, lng: lng};
 
+
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
                 title: 'Hello World!'
             });
+            google.maps.event.addListener(marker,'click', (function(marker,name, infowindow){
+                return function() {
+                    infowindow.setContent(name);
+                    infowindow.open(map,marker);
+                };
+            })(marker,data[n].name, infowindow));
+
             markers.push(marker);
         }
     });
