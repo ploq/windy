@@ -151,5 +151,5 @@ noUiSlider.create(distanceSlider, {
 });
 
 distanceSlider.noUiSlider.on('update', function( values, handle ) {
-    document.getElementById('distance-slider-number').innerHTML = Math.round(values[handle]);
+    document.getElementById('distance-slider-number').innerHTML = Math.round(values[handle])+" km";
 });
