@@ -12,6 +12,8 @@ function initMap() {
 
     document.body.removeChild(sidenav);
 
+    initSlider();
+
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById("wdir_control"));
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("adv_opt"));
 
@@ -60,8 +62,9 @@ function drawChart() {
         chartArea: {top: 60},
         fontName: "Roboto Mono",
         pieSliceTextStyle: {
+            bold: true,
             color: '#605B56',
-            fontSize: "14"
+            fontSize: "20"
         },
         pieSliceBorderColor: "#605B56"
     };
@@ -109,47 +112,49 @@ function checkRow(selectedArr, row) {
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
-var distanceSlider = document.getElementById('distance-slider');
 
-//In km
-noUiSlider.create(distanceSlider, {
-    start: [ 10 ],
-    connect: [true, false],
-    snap: true,
-    range: {
-        'min': 0,
-        '5%': 5,
-        '10%': 10,
-        '13%': 15,
-        '15%': 20,
-        '18%': 25,
-        '20%': 30,
-        '22%': 35,
-        '24%': 40,
-        '26%': 45,
-        '28%': 50,
-        '30%': 60,
-        '32%': 70,
-        '34%': 80,
-        '36%': 90,
-        '38%': 100,
-        '40%': 150,
-        '45%': 200,
-        '50%': 250,
-        '55%': 300,
-        '60%': 350,
-        '65%': 400,
-        '70%': 450,
-        '75%': 500,
-        '80%': 600,
-        '85%': 700,
-        '90%': 800,
-        '95%': 900,
-        '100%': 1000,
-        'max': [ 1000 ]
-    }
-});
+function initSlider() {
+    var distanceSlider = document.getElementById('distance-slider');
 
-distanceSlider.noUiSlider.on('update', function( values, handle ) {
-    document.getElementById('distance-slider-number').innerHTML = Math.round(values[handle])+" km";
-});
+    noUiSlider.create(distanceSlider, {
+        start: [ 10 ],
+        connect: [true, false],
+        snap: true,
+        range: {
+            'min': 0,
+            '5%': 5,
+            '10%': 10,
+            '13%': 15,
+            '15%': 20,
+            '18%': 25,
+            '20%': 30,
+            '22%': 35,
+            '24%': 40,
+            '26%': 45,
+            '28%': 50,
+            '30%': 60,
+            '32%': 70,
+            '34%': 80,
+            '36%': 90,
+            '38%': 100,
+            '40%': 150,
+            '45%': 200,
+            '50%': 250,
+            '55%': 300,
+            '60%': 350,
+            '65%': 400,
+            '70%': 450,
+            '75%': 500,
+            '80%': 600,
+            '85%': 700,
+            '90%': 800,
+            '95%': 900,
+            '100%': 1000,
+            'max': [ 1000 ]
+        }
+    });
+
+    distanceSlider.noUiSlider.on('update', function( values, handle ) {
+        document.getElementById('dist_counter').innerHTML = Math.round(values[handle])+" km";
+    });
+}
