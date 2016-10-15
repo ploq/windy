@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:700');
+    @import url('https://fonts.googleapis.com/css?family=Lato');
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    #main {
+      height: 100%;
+      -webkit-transition: margin-left 0.25s;
+      transition: margin-left 0.25s;
+    }
+
+    #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+        padding: 0 11px 0 13px;
+        width: 294px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        padding-left: 10px;
+        padding-bottom: 15px;
+        box-shadow: 0 0px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #wdir_control {
+        width: 350px;
+        height: 100%;
+        background-color: rgba(214, 215, 216, 0.5)
+      }
+
+      #sidenav-wrapper {
+        padding-left: 15px;
+      }
+
+      #piechart {
+        height: 400px;
+        left: -75px;
+        position: relative;
+        z-index: -1;
+      }
+
+      #adv_opt {
+        margin-bottom: 15px;
+      }
+    </style>
+
+  </head>
+
+  <body>
+  <ul id="slide-out" class="side-nav">
+    <li><input type="text"></li>
+    <li>
+      <div style="margin: 0 5px 0;" id="handle-slider"></div>
+    </li>
+  </ul>
+
+  <div id="wdir_control">
+    <div id="piechart"></div>
+  </div>
+  
+  <div id="main"></div>
+
+<div id="sidenav-wrapper">
+  <input id="pac-input" class="controls" type="text" placeholder="Search By City">
+</div>
+  <button id="adv_opt" data-activates="slide-out" class="button-collapse btn red">Advanced options</button>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.min.js"></script>
+    
+    <script src="main.js" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRqIj5qsadDRvnP8kWrbWravGOcr2iEGc&callback=initMap&libraries=places" defer></script>
+  </body>
+</html>
+      
