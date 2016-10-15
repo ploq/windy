@@ -1,5 +1,16 @@
 var markers = [];
+var selected = [];
 var map;
+
+var wdir_intepret = {0: "N",
+    1: "NE",
+    2: "E",
+    3: "SE",
+    4: "S",
+    5: "SW",
+    6: "W",
+    7: "NW"};
+
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('main'), {
@@ -74,7 +85,7 @@ function drawChart() {
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-    var selected = [];
+
 
     google.visualization.events.addListener(chart, "select", function() {
         var slice = {};
@@ -97,6 +108,7 @@ function drawChart() {
         }
         options["slices"] =  slice;
         chart.draw(data, options);
+        updateMarkers();
     });
 
     chart.draw(data, options);
@@ -175,7 +187,19 @@ function updateMarkers() {
     deleteMarkers();
     var center = map.getCenter();
     var radius = Number(document.getElementById('dist_counter').innerHTML.split("km")[0])*1000;
-    $.get("/api/v1/spots/" + center.lat() + "/" + center.lng() + "/" + radius.toString(), function (data) {
+    var wdir = [];
+    if (selected.length !== 0 && selected.length !== 8) {
+        for (var n = 0; n < selected.length; n++) {
+            wdir.push(wdir_intepret[selected[n].row]);
+        }
+        wdir = JSON.stringify(wdir);
+    }
+
+    var url = "/api/v1/spots/" + center.lat() + "/" + center.lng() + "/" + radius.toString() + "/";
+    if (wdir.length !== 0) {
+        url = url + wdir;
+    }
+    $.get(url, function (data) {
         data = JSON.parse(data);
         for (var n = 0; n < data.length; n++) {
             var lat = data[n].coords.coordinates[1];
