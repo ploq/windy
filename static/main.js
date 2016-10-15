@@ -109,12 +109,24 @@ function checkRow(selectedArr, row) {
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
-var handlesSlider = document.getElementById('handle-slider');
+var distanceSlider = document.getElementById('distance-slider');
 
-noUiSlider.create(handlesSlider, {
-	start: [ 4000, 8000 ],
-	range: {
-		'min': [  2000 ],
-		'max': [ 10000 ]
-	}
+//In km
+noUiSlider.create(distanceSlider, {
+    start: [ 10 ],
+    connect: [true, false],
+    snap: false,
+    range: {
+        'min': 0,
+        '10%': 10,
+        '30%': 50,
+        '50%': 100,
+        '60%': 160,
+        '80%': 500,
+        'max': [ 1000 ]
+    }
+});
+
+distanceSlider.noUiSlider.on('update', function( values, handle ) {
+    document.getElementById('distance-slider-number').innerHTML = Math.round(values[handle]);
 });
