@@ -1,9 +1,12 @@
+var markers = [];
+var map;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('main'), {
         center: {lat: 57.70887, lng: 11.97456},
         zoom: 12,
-         mapTypeControl: false,
-         streetViewControl: false
+        mapTypeControl: false,
+        streetViewControl: false
     });
     var wdir = document.getElementById("wdir_control");
     var sidenav = document.getElementById("sidenav-wrapper");
@@ -17,6 +20,7 @@ function initMap() {
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById("wdir_control"));
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("adv_opt"));
 
+    updateMarkers();
 
     $("#adv_opt").on("click", function () {
         var map = document.getElementById("main");
@@ -156,5 +160,34 @@ function initSlider() {
 
     distanceSlider.noUiSlider.on('update', function( values, handle ) {
         document.getElementById('dist_counter').innerHTML = Math.round(values[handle])+" km";
+        updateMarkers();
+    });
+}
+
+function deleteMarkers() {
+    for (var n = 0; n < markers.length; n++) {
+        markers[n].setMap(null);
+    }
+    markers = [];
+}
+
+function updateMarkers() {
+    deleteMarkers();
+    var center = map.getCenter();
+    var radius = Number(document.getElementById('dist_counter').innerHTML.split("km")[0])*1000;
+    $.get("/api/v1/spots/" + center.lat() + "/" + center.lng() + "/" + radius.toString(), function (data) {
+        data = JSON.parse(data);
+        for (var n = 0; n < data.length; n++) {
+            var lat = data[n].coords.coordinates[1];
+            var lng = data[n].coords.coordinates[0];
+            var latlng = {lat: lat, lng: lng};
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Hello World!'
+            });
+            markers.push(marker);
+        }
     });
 }
