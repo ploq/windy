@@ -1,6 +1,7 @@
 var markers = [];
 var selected = [];
 var map;
+var init_center;
 
 var wdir_intepret = {0: "N",
     1: "NE",
@@ -30,7 +31,7 @@ function initMap() {
 
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById("wdir_control"));
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("adv_opt"));
-
+    init_center = map.getCenter();
     updateMarkers();
 
     $("#adv_opt").on("click", function () {
@@ -222,5 +223,12 @@ function updateMarkers() {
 
             markers.push(marker);
         }
+
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+        map.fitBounds(bounds);
+        map.setCenter(init_center);
     });
 }
