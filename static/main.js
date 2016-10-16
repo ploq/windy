@@ -60,6 +60,7 @@ function initMap() {
         //Center map and do new search
         var place = autocomplete.getPlace();
         init_center = place.geometry.location;
+        console.log(init_center);
         updateMarkers();
     });
 }
@@ -199,7 +200,11 @@ function deleteMarkers() {
 function updateMarkers() {
     var infowindow = new google.maps.InfoWindow();
     deleteMarkers();
-    var center = map.getCenter();
+    if(typeof init_center !== "undefined")
+        var center = init_center;
+    else
+        var center = map.getCenter();
+
     var radius = Number(document.getElementById('dist_counter').innerHTML.split("km")[0])*1000;
     var wdir = [];
     if (selected.length !== 0 && selected.length !== 8) {
