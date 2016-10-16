@@ -58,6 +58,9 @@ function initMap() {
 
     autocomplete.addListener('place_changed', function() {
         //Center map and do new search
+        var place = autocomplete.getPlace();
+        init_center = place.geometry.location;
+        updateMarkers();
     });
 }
 
