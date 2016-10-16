@@ -220,32 +220,34 @@ function updateMarkers() {
     }
     $.get(url, function (data) {
         data = JSON.parse(data);
-        for (var n = 0; n < data.length; n++) {
-            var lat = data[n].coords.coordinates[1];
-            var lng = data[n].coords.coordinates[0];
-            var latlng = {lat: lat, lng: lng};
+        if (data.length > 0) {
+            for (var n = 0; n < data.length; n++) {
+                var lat = data[n].coords.coordinates[1];
+                var lng = data[n].coords.coordinates[0];
+                var latlng = {lat: lat, lng: lng};
 
 
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                title: 'Hello World!'
-            });
-            google.maps.event.addListener(marker,'click', (function(marker,name, infowindow){
-                return function() {
-                    infowindow.setContent(name);
-                    infowindow.open(map,marker);
-                };
-            })(marker,data[n].name, infowindow));
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    title: 'Hello World!'
+                });
+                google.maps.event.addListener(marker,'click', (function(marker,name, infowindow){
+                    return function() {
+                        infowindow.setContent(name);
+                        infowindow.open(map,marker);
+                    };
+                })(marker,data[n].name, infowindow));
 
-            markers.push(marker);
+                markers.push(marker);
+            }
+
+            var bounds = new google.maps.LatLngBounds();
+            for (var i = 0; i < markers.length; i++) {
+                bounds.extend(markers[i].getPosition());
+            }
+            map.fitBounds(bounds);
+            map.setCenter(init_center);
         }
-
-        var bounds = new google.maps.LatLngBounds();
-        for (var i = 0; i < markers.length; i++) {
-            bounds.extend(markers[i].getPosition());
-        }
-        map.fitBounds(bounds);
-        map.setCenter(init_center);
     });
 }
