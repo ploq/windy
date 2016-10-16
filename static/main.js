@@ -14,6 +14,12 @@ var wdir_intepret = {0: "N",
 
 
 function initMap() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(updateMarkers);
+    } else {
+
+    }
+
     map = new google.maps.Map(document.getElementById('main'), {
         center: {lat: 57.70887, lng: 11.97456},
         zoom: 12,
@@ -31,7 +37,10 @@ function initMap() {
 
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById("wdir_control"));
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById("adv_opt"));
-    init_center = map.getCenter();
+
+    if(typeof init_center === "undefined")
+        init_center = map.getCenter();
+
     updateMarkers();
 
     $("#adv_opt").on("click", function () {
@@ -197,9 +206,15 @@ function deleteMarkers() {
     markers = [];
 }
 
-function updateMarkers() {
+function updateMarkers(position) {
     var infowindow = new google.maps.InfoWindow();
     deleteMarkers();
+
+    if(typeof position !== "undefined") {
+        init_center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(init_center);
+    }
+
     if(typeof init_center !== "undefined")
         var center = init_center;
     else
@@ -244,10 +259,12 @@ function updateMarkers() {
 
             var bounds = new google.maps.LatLngBounds();
             for (var i = 0; i < markers.length; i++) {
+                console.log(markers[i].getPosition())
                 bounds.extend(markers[i].getPosition());
             }
+            console.log(position, markers.length);
             map.fitBounds(bounds);
-            map.setCenter(init_center);
+
         }
     });
 }
