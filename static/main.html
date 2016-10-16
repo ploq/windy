@@ -75,6 +75,15 @@
         font-family: 'Roboto Mono', monospace;
         font-size: 16px;
       }
+
+      #distance-slider {
+        margin: 15px 15px 10px 0;
+      }
+
+      #distance-slider .noUi-connect {
+        background: #EAEAEA;
+      }
+
     </style>
 
   </head>
@@ -95,7 +104,7 @@
 
 <div id="sidenav-wrapper">
   <input id="pac-input" class="controls" type="text" placeholder="Search By City">
-  <div style="margin: 0 15px 10px 0;" id="distance-slider"></div>
+  <div id="distance-slider"></div>
   <span id="dist_counter"></span>
 </div>
   <button id="adv_opt" data-activates="slide-out" class="button-collapse btn red">Advanced options</button>
