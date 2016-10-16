@@ -50,6 +50,15 @@ function initMap() {
     });
 
     $(".button-collapse").sideNav();
+
+    //Init search box auto complete
+    var searchBox = document.getElementById('pac-input');
+    var autocomplete = new google.maps.places.Autocomplete(searchBox);
+    autocomplete.bindTo('bounds', map);
+
+    autocomplete.addListener('place_changed', function() {
+        //Center map and do new search
+    });
 }
 
 function drawChart() {
