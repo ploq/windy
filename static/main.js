@@ -46,7 +46,6 @@ function initMap() {
     google.maps.event.addListener(map, 'zoom_changed', function() {
         zoomChangeBoundsListener =
             google.maps.event.addListener(map, 'bounds_changed', function(event) {
-                console.log(this.getZoom());
                 if (this.getZoom() > 15 && this.initialZoom === true) {
                     // Change max/min zoom here
                     this.setZoom(15);
@@ -261,12 +260,17 @@ function updateMarkers(position) {
                     map: map,
                     title: 'Hello World!'
                 });
-                google.maps.event.addListener(marker,'click', (function(marker,name, infowindow){
+                google.maps.event.addListener(marker,'click', (function(marker,data, infowindow){
                     return function() {
-                        infowindow.setContent(name);
+                        var info = document.getElementById("info");
+                        var spot_namediv = document.getElementById("spot_name");
+                        info.innerHTML = data.desc;
+                        spot_namediv.innerHTML = data.name;
+
+                        infowindow.setContent(data.name);
                         infowindow.open(map,marker);
                     };
-                })(marker,data[n].name, infowindow));
+                })(marker,data[n], infowindow));
 
                 markers.push(marker);
             }

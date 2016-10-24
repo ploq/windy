@@ -31,7 +31,7 @@ module.exports = (function() {
 
         mongodb.then(function(dbobj) {
             dbobj.spots.find(mongo_query,
-                { _id: 0, range: 0, desc: 0 }).toArray(function(err, rows) {
+                { _id: 0, range: 0 }).toArray(function(err, rows) {
                     if (err) {
                         console.log(err);
                         res.send("[]");

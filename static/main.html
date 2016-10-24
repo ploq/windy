@@ -12,7 +12,9 @@
 
     <style type="text/css">
       @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700');
-    html, body {
+      @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+      html, body {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -51,9 +53,9 @@
       }
 
       #wdir_control {
-        width: 350px;
+        width: 400px;
         height: 100%;
-        background-color: rgba(214, 215, 216, 0.5)
+        background-color: rgba(214, 215, 216, 0.7)
       }
 
       #sidenav-wrapper {
@@ -84,6 +86,19 @@
         background: #EAEAEA;
       }
 
+      #info {
+        font-family: 'Roboto', sans-serif;;
+        font-size: 15px;
+        padding-right: 5px;
+      }
+
+      #spot_name {
+        font-family: 'Roboto', sans-serif;;
+        padding-top: 40px;
+      }
+
+
+
     </style>
 
   </head>
@@ -91,9 +106,6 @@
   <body>
   <ul id="slide-out" class="side-nav">
     <li><input type="text"></li>
-    <li>
-
-    </li>
   </ul>
 
   <div id="wdir_control">
@@ -106,6 +118,8 @@
   <input id="pac-input" class="controls" type="text" placeholder="Search By City">
   <div id="distance-slider"></div>
   <span id="dist_counter"></span>
+  <h5 id="spot_name"></h5>
+  <div id="info"></div>
 </div>
   <button id="adv_opt" data-activates="slide-out" class="button-collapse btn red">Advanced options</button>
 
